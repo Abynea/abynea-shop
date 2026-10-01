@@ -1,5 +1,7 @@
 # ABYNÉA — Boutique e-commerce
 
+🌐 **Site en ligne : https://abynea.github.io/abynea-shop/**
+
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Abynea/abynea-shop)
 
 Boutique en ligne complète pour **ABYNÉA**, marque française d'accessoires de mode & tech chic :
