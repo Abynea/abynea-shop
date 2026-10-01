@@ -19,7 +19,15 @@ STATIC_EXPORT=true NEXT_PUBLIC_BASE_PATH=/abynea-shop npm run build   # -> out/
 - **Repo** : https://github.com/Abynea/abynea-shop (owner `Abynea`).
 - **GitHub Pages** : https://abynea.github.io/abynea-shop/ — servi depuis la branche `gh-pages` (racine), build_type `legacy`.
 - Le PAT disponible n'a **pas** le scope `workflow` : ne pas ajouter de fichier `.github/workflows/*`, déployer en poussant `out/` sur `gh-pages` (force push).
+- ⚠️ Le `GITHUB_TOKEN` de l'environnement est en lecture seule (403 « Resource not accessible by integration » sur toute écriture git/API). Pour pousser, utiliser un PAT utilisateur fourni par l'utilisateur :
+  `git -c credential.helper= push "https://x-access-token:<PAT>@github.com/Abynea/abynea-shop.git" <branche>`
 - En statique il n'y a pas de serveur : le paiement bascule en **mode démo** côté client. Les vrais encaissements nécessitent un hébergement Node (Vercel).
+
+## Logo & favicons
+
+- `src/components/ui/Logo.tsx` : `Logo` (wordmark SVG, `viewBox 0 0 200 50`, étincelle or au-dessus du É) et `LogoMark` (monogramme « A » pour le carré).
+- Icônes générées par `python3 scripts/generate-icons.py` (nécessite Pillow) → `src/app/favicon.ico`, `src/app/icon.svg`, `src/app/apple-icon.png`, `public/favicon-32.png`.
+- Le favicon `icon.svg` est statique : le garder synchronisé avec `LogoMark` si le monogramme change.
 
 ## Paiements
 
