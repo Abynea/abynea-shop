@@ -26,8 +26,10 @@ STATIC_EXPORT=true NEXT_PUBLIC_BASE_PATH=/abynea-shop npm run build   # -> out/
 ## Logo & favicons
 
 - `src/components/ui/Logo.tsx` : `Logo` (wordmark SVG, `viewBox 0 0 200 50`, étincelle or au-dessus du É) et `LogoMark` (monogramme « A » pour le carré).
+- `variant="light"` = version blanche, utilisée par `src/components/layout/BrandBand.tsx` (bandeau encre en fin de `/notre-histoire`).
 - Icônes générées par `python3 scripts/generate-icons.py` (nécessite Pillow) → `src/app/favicon.ico`, `src/app/icon.svg`, `src/app/apple-icon.png`, `public/favicon-32.png`.
 - Le favicon `icon.svg` est statique : le garder synchronisé avec `LogoMark` si le monogramme change.
+- Image de partage social `public/og-image.png` (1200×630) générée par `python3 scripts/generate-og-image.py` (polices Playfair/Inter dans `/tmp`). Métadonnées Open Graph + Twitter (`summary_large_image`) dans `src/app/layout.tsx`, URL absolue via `metadataBase` (`NEXT_PUBLIC_SITE_URL`).
 
 ## Paiements
 
