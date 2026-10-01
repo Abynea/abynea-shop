@@ -1,46 +1,16 @@
 import { NextResponse } from "next/server";
 import { getStripe } from "@/lib/stripe";
-import { FREE_SHIPPING_THRESHOLD, SHIPPING_METHODS } from "@/lib/constants";
+import { computeTotals, type PaymentCustomer, type PaymentLine } from "@/lib/payments";
 import { generateOrderNumber, generateTrackingNumber } from "@/lib/utils";
 
 export const runtime = "nodejs";
 
-type IncomingItem = {
-  productId: string;
-  name: string;
-  price: number;
-  quantity: number;
-  color?: string;
-  model?: string;
-};
-
 type CheckoutBody = {
-  items: IncomingItem[];
+  items: PaymentLine[];
   shippingId: string;
-  customer: {
-    email: string;
-    firstName: string;
-    lastName: string;
-    address: string;
-    zip: string;
-    city: string;
-    country: string;
-    phone?: string;
-  };
+  customer: PaymentCustomer;
   promo?: string | null;
 };
-
-const PROMO_CODES: Record<string, number> = { ABYNEA10: 0.1, WELCOME10: 0.1, TIKTOK15: 0.15 };
-
-function computeTotals(items: IncomingItem[], shippingId: string, promo?: string | null) {
-  const subtotal = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
-  const shipping = SHIPPING_METHODS.find((s) => s.id === shippingId) ?? SHIPPING_METHODS[0];
-  const shippingCost = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : shipping.price;
-  const rate = promo && PROMO_CODES[promo.toUpperCase()] ? PROMO_CODES[promo.toUpperCase()] : 0;
-  const discount = Math.round(subtotal * rate * 100) / 100;
-  const total = Math.max(0, Math.round((subtotal - discount + shippingCost) * 100) / 100);
-  return { subtotal, discount, shippingCost, total, shippingName: shipping.name };
-}
 
 export async function POST(req: Request) {
   let body: CheckoutBody;
@@ -99,7 +69,7 @@ export async function POST(req: Request) {
           trackingNumber,
           customerName: `${customer.firstName} ${customer.lastName}`,
         },
-        success_url: `${origin}/confirmation?order=${orderNumber}&tracking=${trackingNumber}`,
+        success_url: `${origin}/confirmation?order=${orderNumber}&tracking=${trackingNumber}&total=${totals.total}`,
         cancel_url: `${origin}/checkout?canceled=1`,
       });
 
