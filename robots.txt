@@ -5,4 +5,4 @@ Disallow: /confirmation
 Disallow: /compte
 Disallow: /api/
 
-Sitemap: http://localhost:3000/sitemap.xml
+Sitemap: https://abynea.github.io/abynea-shop/sitemap.xml
