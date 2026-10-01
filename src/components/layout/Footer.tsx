@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Check, Instagram, Mail, Music2, Send } from "lucide-react";
 import { SITE } from "@/lib/constants";
+import { Logo } from "@/components/ui/Logo";
 
 const FOOTER_LINKS = [
   {
@@ -105,8 +106,8 @@ export function Footer() {
       {/* Links */}
       <div className="container-x grid gap-10 border-t border-line py-12 md:grid-cols-2 lg:grid-cols-5">
         <div className="lg:col-span-2">
-          <Link href="/" className="font-serif text-2xl tracking-brand text-ink">
-            ABYNÉA
+          <Link href="/" aria-label="ABYNÉA — Accueil">
+            <Logo className="h-7 text-ink" />
           </Link>
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-ink-muted">
             {SITE.description}

@@ -9,6 +9,7 @@ import { NAV_LINKS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/store/cart";
 import { useIsMounted } from "@/hooks/useMediaQuery";
+import { Logo } from "@/components/ui/Logo";
 import { SearchOverlay } from "./SearchOverlay";
 
 export function Header() {
@@ -84,10 +85,8 @@ export function Header() {
 
             {/* Center: logo */}
             <Link href="/" className="flex shrink-0 flex-col items-center" aria-label="ABYNÉA — Accueil">
-              <span className="font-serif text-2xl font-semibold leading-none tracking-brand text-ink lg:text-[28px]">
-                ABYNÉA
-              </span>
-              <span className="mt-0.5 hidden text-[8px] uppercase tracking-[0.3em] text-ink-faint sm:block">
+              <Logo className="h-6 text-ink sm:h-7 lg:h-9" />
+              <span className="mt-1 hidden text-[8px] uppercase tracking-[0.3em] text-ink-faint sm:block">
                 Accessoires & Bijoux
               </span>
             </Link>
@@ -170,7 +169,7 @@ export function Header() {
               className="flex h-full w-[82%] max-w-sm flex-col bg-ivory"
             >
               <div className="flex items-center justify-between border-b border-line px-5 py-4">
-                <span className="font-serif text-xl tracking-brand">ABYNÉA</span>
+                <Logo className="h-6 text-ink" />
                 <button onClick={() => setMobileOpen(false)} aria-label="Fermer le menu">
                   <X size={22} />
                 </button>
