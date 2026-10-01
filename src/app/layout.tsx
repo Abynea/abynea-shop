@@ -20,7 +20,15 @@ const playfair = Playfair_Display({
   weight: ["400", "500", "600", "700"],
 });
 
+const OG_IMAGE = {
+  url: "/og-image.png",
+  width: 1200,
+  height: 630,
+  alt: "ABYNÉA — Accessoires & Bijoux",
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://abynea.github.io/abynea-shop"),
   title: {
     default: `${SITE.name} — ${SITE.tagline}`,
     template: `%s · ${SITE.name}`,
@@ -41,6 +49,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_FR",
     siteName: SITE.name,
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE.name} — ${SITE.tagline}`,
+    description: SITE.description,
+    images: [OG_IMAGE],
   },
   robots: { index: true, follow: true },
 };

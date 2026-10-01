@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Heart, Leaf, Sparkles, Users } from "lucide-react";
+import { BrandBand } from "@/components/layout/BrandBand";
 
 export const metadata: Metadata = {
   title: "Notre Histoire",
@@ -90,6 +91,8 @@ export default function NotreHistoirePage() {
           Découvrir la collection
         </Link>
       </section>
+
+      <BrandBand />
     </div>
   );
 }
